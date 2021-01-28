@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aliasad106/React-Native-Mopub-SDK",
-    "baseUrl": "https://github.com/aliasad106/React-Native-Mopub-SDK"
+    "url": "https://github.com/jeremyvinec/expo-mopub",
+    "baseUrl": "https://github.com/jeremyvinec/expo-mopub"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "Yvinec Jérémy",
+    "email": "jeremy.yvinec@gmail.com"
   },
   "license": "Apache-2.0",
   "licenseFilename": "LICENSE",
