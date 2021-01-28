@@ -1,12 +1,12 @@
-# react-native-mopub-sdk
+# expo-mopub
 
 ## Getting started
 
-`$ npm install react-native-mopub-sdk --save`
+`$ yarn add expo-mopub`
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-mopub-sdk`
+`$ react-native link expo-mopub`
 
 
 ### MoPub Integration
@@ -35,7 +35,7 @@ pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
 pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
 pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
 pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-pod 'react-native-mopub-sdk', path: '../node_modules/react-native-mopub-sdk'
+pod 'expo-mopub', path: '../node_modules/expo-mopub'
 end
 ```
 
@@ -85,7 +85,7 @@ maven { url 'https://jitpack.io' }
 ## Usage
 ### Interstitial
 ```javascript
-import {RNMoPubInterstitial} from 'react-native-mopub-sdk';
+import {RNMoPubInterstitial} from 'expo-mopub';
 ```
 ### Interstitial Methods
 | Mehod | Description |
@@ -99,7 +99,7 @@ import {RNMoPubInterstitial} from 'react-native-mopub-sdk';
 |removeAllListeners (eventType: string)|Remove listeners for added for events from Interstitial ad.|
 ### Banner Ad
 ```javascript
-import {MoPubBanner} from 'react-native-mopub-sdk';
+import {MoPubBanner} from 'expo-mopub';
 ```
 ### Banner Props
 | Prop |Type| Description |
