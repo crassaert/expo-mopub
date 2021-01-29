@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
     
     s.subspec "AdColony" do |ss|
         
-        ss.dependency 'MoPub-AdColony-Adapters', '~> 3.3.7.0'
+        ss.dependency 'MoPub-AdColony-Adapters', '~> 4.4.1.1.3'
         
     end
     
@@ -44,19 +44,19 @@ Pod::Spec.new do |s|
     
     s.subspec "Tapjoy" do |ss|
         
-        ss.dependency 'MoPub-TapJoy-Adapters', '~> 12.2.0.4'
+        ss.dependency 'MoPub-TapJoy-Adapters', '~> 12.7.1.2'
         
     end
     
     s.subspec "AppLovin" do |ss|
         
-        ss.dependency 'MoPub-Applovin-Adapters', '~> 6.2.0.1'
+        ss.dependency 'MoPub-Applovin-Adapters', '~> 6.15.1.0'
         
     end
     
     s.subspec "Vungle" do |ss|
         
-        ss.dependency 'MoPub-Vungle-Adapters', '~> 6.3.2.5'
+        ss.dependency 'MoPub-Vungle-Adapters', '~> 6.8.1.3'
         
     end
     
