@@ -26,7 +26,7 @@ target 'example' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
     
-  pod 'react-native-mopub-sdk', path: '../node_modules/react-native-mopub-sdk'
+  pod 'expo-mopub', path: '../node_modules/expo-mopub'
 end
 
 

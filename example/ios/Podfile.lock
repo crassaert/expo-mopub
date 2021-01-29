@@ -62,30 +62,30 @@ PODS:
     - VungleSDK-iOS (= 6.3.2)
   - React (0.59.5):
     - React/Core (= 0.59.5)
-  - react-native-mopub-sdk (1.0.0):
+  - expo-mopub (1.0.0):
     - React
-    - react-native-mopub-sdk/AdColony (= 1.0.0)
-    - react-native-mopub-sdk/AdMob (= 1.0.0)
-    - react-native-mopub-sdk/AppLovin (= 1.0.0)
-    - react-native-mopub-sdk/MoPub (= 1.0.0)
-    - react-native-mopub-sdk/Tapjoy (= 1.0.0)
-    - react-native-mopub-sdk/Vungle (= 1.0.0)
-  - react-native-mopub-sdk/AdColony (1.0.0):
+    - expo-mopub/AdColony (= 1.0.0)
+    - expo-mopub/AdMob (= 1.0.0)
+    - expo-mopub/AppLovin (= 1.0.0)
+    - expo-mopub/MoPub (= 1.0.0)
+    - expo-mopub/Tapjoy (= 1.0.0)
+    - expo-mopub/Vungle (= 1.0.0)
+  - expo-mopub/AdColony (1.0.0):
     - MoPub-AdColony-Adapters (~> 3.3.7.0)
     - React
-  - react-native-mopub-sdk/AdMob (1.0.0):
+  - expo-mopub/AdMob (1.0.0):
     - MoPub-AdMob-Adapters (~> 7.39.0.0)
     - React
-  - react-native-mopub-sdk/AppLovin (1.0.0):
+  - expo-mopub/AppLovin (1.0.0):
     - MoPub-Applovin-Adapters (~> 6.2.0.1)
     - React
-  - react-native-mopub-sdk/MoPub (1.0.0):
+  - expo-mopub/MoPub (1.0.0):
     - mopub-ios-sdk (~> 5.0)
     - React
-  - react-native-mopub-sdk/Tapjoy (1.0.0):
+  - expo-mopub/Tapjoy (1.0.0):
     - MoPub-TapJoy-Adapters (~> 12.2.0.4)
     - React
-  - react-native-mopub-sdk/Vungle (1.0.0):
+  - expo-mopub/Vungle (1.0.0):
     - MoPub-Vungle-Adapters (~> 6.3.2.5)
     - React
   - React/Core (0.59.5):
@@ -136,7 +136,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - react-native-mopub-sdk (from `../node_modules/react-native-mopub-sdk`)
+  - expo-mopub (from `../node_modules/expo-mopub`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -170,8 +170,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
-  react-native-mopub-sdk:
-    :path: "../node_modules/react-native-mopub-sdk"
+  expo-mopub:
+    :path: "../node_modules/expo-mopub"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -190,7 +190,7 @@ SPEC CHECKSUMS:
   MoPub-TapJoy-Adapters: 8c9ecfb55495bb75573e692f962f73ef7081d4f7
   MoPub-Vungle-Adapters: a1a802bb5026b55c558a27348b5b18fac1f85a41
   React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
-  react-native-mopub-sdk: 20fbc42c073ef4734a2cc509a1ebe4f30e48d55a
+  expo-mopub: 20fbc42c073ef4734a2cc509a1ebe4f30e48d55a
   TapjoySDK: f5b3711c12205bbfbda3b95179072c8a9b5fcf09
   VungleSDK-iOS: 69a7f407b60281d2954ffc5eeeac349fbfed51d6
   yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd

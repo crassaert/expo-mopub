@@ -17,7 +17,7 @@ import {
     Image,
     ImageBackground
 } from 'react-native';
-import {RNMoPubInterstitial, MoPubBanner, RNMoPubRewardedVideo, RNNativeAdView} from 'react-native-mopub-sdk';
+import {RNMoPubInterstitial, MoPubBanner, RNMoPubRewardedVideo, RNNativeAdView} from 'expo-mopub';
 
 // const RNNativeAdView = requireNativeComponent("RNNativeAdView")
 
