@@ -1,7 +1,7 @@
 {
   "name": "expo-mopub",
   "title": "Expo Mopub",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "this is mopub sdk react native library compatible with expo",
   "main": "index.js",
   "scripts": {

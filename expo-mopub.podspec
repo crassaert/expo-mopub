@@ -26,37 +26,11 @@ Pod::Spec.new do |s|
         ss.dependency 'mopub-ios-sdk', '~> 5.15.0'
         
         s.static_framework = true
-    end
-    
-    s.subspec "AdColony" do |ss|
-        
-        ss.dependency 'MoPub-AdColony-Adapters', '~> 4.4.1.1.3'
-        
-    end
-    
+    end  
 
     s.subspec "AdMob" do |ss|
         
         ss.dependency 'MoPub-AdMob-Adapters', '~> 7.55.1'
-        
-    end
-    
-    
-    s.subspec "Tapjoy" do |ss|
-        
-        ss.dependency 'MoPub-TapJoy-Adapters', '~> 12.7.1.2'
-        
-    end
-    
-    s.subspec "AppLovin" do |ss|
-        
-        ss.dependency 'MoPub-Applovin-Adapters', '~> 6.15.1.0'
-        
-    end
-    
-    s.subspec "Vungle" do |ss|
-        
-        ss.dependency 'MoPub-Vungle-Adapters', '~> 6.8.1.3'
         
     end
     
