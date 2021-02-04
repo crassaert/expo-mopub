@@ -52,16 +52,30 @@ const NATIVE_UNIT_ID =
 const App: () => React$Node = () => {
   useEffect(() => {
     RNMoPubInterstitial.initializeInterstitialAd(INTERSTITIAL_UNIT_ID);
-    RNMoPubRewardedVideo.initializeSdkForRewardedVideoAd(REWARDED_UNIT_ID);
+    //RNMoPubRewardedVideo.initializeSdkForRewardedVideoAd(REWARDED_UNIT_ID);
     RNMoPubInterstitial.addEventListener('onLoaded', () => {
       console.log('Interstitial Loaded');
       RNMoPubInterstitial.show();
     });
+    RNMoPubInterstitial.addEventListener('onFailed', (message) =>
+      console.log('Interstitial failed: ' + JSON.stringify(message)),
+    );
   }, []);
+
+  const onLoaded = () => {
+    console.log('MoPub banner loaded');
+  };
+
+  const onFailed = (message) => {
+    console.log('MoPub banner failed with message: ' + message);
+  };
+
+  const onClicked = () => {
+    console.log('MoPub banner was clicked');
+  };
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
@@ -69,39 +83,24 @@ const App: () => React$Node = () => {
           <MoPubBanner
             adUnitId={BANNERL_UNIT_ID}
             autoRefresh={true}
-            onLoaded={this.onLoaded}
-            onFailed={this.onFailed}
-            onClicked={this.onClicked}
+            onLoaded={onLoaded}
+            onFailed={onFailed}
+            onClicked={onClicked}
           />
 
           <TouchableOpacity
-            style={{
-              width: 100,
-              height: 30,
-              backgroundColor: 'red',
-              marginTop: 10,
-            }}
+            style={styles.bloc}
             onPress={() => console.log(RNMoPubInterstitial.show())}>
             <Text>show ad</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              width: 100,
-              height: 30,
-              backgroundColor: 'red',
-              marginTop: 10,
-            }}
+            style={styles.bloc}
             onPress={() => RNMoPubInterstitial.loadAd()}>
             <Text>load ad</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{
-              width: 100,
-              height: 30,
-              backgroundColor: 'red',
-              marginTop: 10,
-            }}
+            style={styles.bloc}
             onPress={() =>
               RNMoPubRewardedVideo.loadRewardedVideoAdWithAdUnitID(
                 REWARDED_UNIT_ID,
@@ -110,12 +109,7 @@ const App: () => React$Node = () => {
             <Text>load video</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              width: 100,
-              height: 30,
-              backgroundColor: 'red',
-              marginTop: 10,
-            }}
+            style={styles.bloc}
             onPress={() =>
               RNMoPubRewardedVideo.presentRewardedVideoAdForAdUnitID(
                 REWARDED_UNIT_ID,
@@ -129,12 +123,7 @@ const App: () => React$Node = () => {
             <Text>show video</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              width: 100,
-              height: 30,
-              backgroundColor: 'red',
-              marginTop: 10,
-            }}
+            style={styles.bloc}
             onPress={() =>
               RNMoPubRewardedVideo.availableRewardsForAdUnitID(
                 REWARDED_UNIT_ID,
@@ -187,6 +176,12 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingRight: 12,
     textAlign: 'right',
+  },
+  bloc: {
+    width: 100,
+    height: 30,
+    backgroundColor: 'red',
+    marginTop: 10,
   },
 });
 

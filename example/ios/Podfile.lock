@@ -5,30 +5,30 @@ PODS:
   - CocoaAsyncSocket (7.6.5)
   - CocoaLibEvent (1.0.0)
   - DoubleConversion (1.1.6)
-  - expo-mopub (1.0.5):
-    - expo-mopub/AdColony (= 1.0.5)
-    - expo-mopub/AdMob (= 1.0.5)
-    - expo-mopub/AppLovin (= 1.0.5)
-    - expo-mopub/MoPub (= 1.0.5)
-    - expo-mopub/Tapjoy (= 1.0.5)
-    - expo-mopub/Vungle (= 1.0.5)
+  - expo-mopub (1.0.6):
+    - expo-mopub/AdColony (= 1.0.6)
+    - expo-mopub/AdMob (= 1.0.6)
+    - expo-mopub/AppLovin (= 1.0.6)
+    - expo-mopub/MoPub (= 1.0.6)
+    - expo-mopub/Tapjoy (= 1.0.6)
+    - expo-mopub/Vungle (= 1.0.6)
     - React
-  - expo-mopub/AdColony (1.0.5):
+  - expo-mopub/AdColony (1.0.6):
     - MoPub-AdColony-Adapters (~> 4.4.1.1)
     - React
-  - expo-mopub/AdMob (1.0.5):
+  - expo-mopub/AdMob (1.0.6):
     - MoPub-AdMob-Adapters (~> 7.69.0)
     - React
-  - expo-mopub/AppLovin (1.0.5):
+  - expo-mopub/AppLovin (1.0.6):
     - MoPub-Applovin-Adapters (~> 6.15.1)
     - React
-  - expo-mopub/MoPub (1.0.5):
+  - expo-mopub/MoPub (1.0.6):
     - mopub-ios-sdk (~> 5.15.0)
     - React
-  - expo-mopub/Tapjoy (1.0.5):
+  - expo-mopub/Tapjoy (1.0.6):
     - MoPub-TapJoy-Adapters (~> 12.7.1)
     - React
-  - expo-mopub/Vungle (1.0.5):
+  - expo-mopub/Vungle (1.0.6):
     - MoPub-Vungle-Adapters (~> 6.8.1)
     - React
   - FBLazyVector (0.63.4)
@@ -557,7 +557,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
   DoubleConversion: cde416483dac037923206447da6e1454df403714
-  expo-mopub: 2c0d27dc1ff851dbfcb3a370017eb9083bb3d4b8
+  expo-mopub: daf4fbdf2a7b6d26f1c3fe6bcb3a137850f7e5f5
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Flipper: be611d4b742d8c87fbae2ca5f44603a02539e365
