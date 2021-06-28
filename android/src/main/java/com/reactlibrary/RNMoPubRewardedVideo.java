@@ -15,6 +15,9 @@ import com.mopub.mobileads.MoPubErrorCode;
 import com.mopub.mobileads.MoPubRewardedVideoListener;
 import com.mopub.mobileads.MoPubRewardedVideos;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -63,11 +66,19 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     }
 
     @ReactMethod
-    public void loadRewardedVideoAdWithAdUnitID(String adUnitId) {
+    public void loadRewardedVideoAdWithAdUnitID(final String adUnitId) {
 
-        MoPubRewardedVideos.loadRewardedVideo(adUnitId);
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+
+        Runnable myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                MoPubRewardedVideos.loadRewardedVideo(adUnitId);
+            }
+        };
+        mainHandler.post(myRunnable);
+
         MoPubRewardedVideos.setRewardedVideoListener(this);
-
     }
 
 
