@@ -33,12 +33,11 @@ RCT_EXPORT_MODULE();
 }
 
 
-RCT_EXPORT_METHOD(loadRewardedVideoAdWithAdUnitID:(NSString *)unitId)
+RCT_EXPORT_METHOD(loadRewardedVideoAdWithAdUnitID:(NSString *)unitId customerId:(NSString *)cid)
 {
-    
-    [MPRewardedVideo loadRewardedVideoAdWithAdUnitID:unitId withMediationSettings:@[]];
+    NSLog(@"Load ad with customerId %@ and unitId %@", cid, unitId);
+    [MPRewardedVideo loadRewardedVideoAdWithAdUnitID:unitId keywords:nil userDataKeywords:nil customerId: cid mediationSettings:nil];
     [MPRewardedVideo setDelegate:self forAdUnitId:unitId];
-    
 }
 
 RCT_EXPORT_METHOD(initializeSdkForRewardedVideoAd:(NSString *)unitId) {
@@ -47,12 +46,12 @@ RCT_EXPORT_METHOD(initializeSdkForRewardedVideoAd:(NSString *)unitId) {
 
 RCT_EXPORT_METHOD(presentRewardedVideoAdForAdUnitID:(NSString *) unitId currencyType:(NSString*)currencyType amount:(nonnull NSNumber*) amount callback:(RCTResponseSenderBlock)callback)
 {
-    
+
     if ([MPRewardedVideo hasAdAvailableForAdUnitID:unitId]) {
         NSPredicate *rewardPredicate = [NSPredicate predicateWithFormat:@"(SELF.currencyType == %@ AND SELF.amount == %@)", currencyType, amount];
-        
+
         MPRewardedVideoReward *selectedReward = [[MPRewardedVideo availableRewardsForAdUnitID:unitId] filteredArrayUsingPredicate:rewardPredicate].firstObject;
-        
+
         if (selectedReward) {
              UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
              [MPRewardedVideo presentRewardedVideoAdForAdUnitID:unitId fromViewController:vc withReward:selectedReward];
@@ -63,7 +62,7 @@ RCT_EXPORT_METHOD(presentRewardedVideoAdForAdUnitID:(NSString *) unitId currency
     } else {
         callback(@[@{@"message":@"ad not found for this UnitId!"}]);
     }
-    
+
 }
 
 RCT_EXPORT_METHOD(hasAdAvailableForAdUnitID:(NSString* ) unitId callback: (RCTResponseSenderBlock)callback) {
@@ -72,9 +71,9 @@ RCT_EXPORT_METHOD(hasAdAvailableForAdUnitID:(NSString* ) unitId callback: (RCTRe
 }
 
 RCT_EXPORT_METHOD(availableRewardsForAdUnitID: (NSString *)unitId callback: (RCTResponseSenderBlock)callback) {
-    
+
     NSArray *rewards = [MPRewardedVideo availableRewardsForAdUnitID: unitId];
-    
+
     NSMutableArray *rewardDictonaries = [NSMutableArray array];
     for (MPRewardedVideoReward* reward in rewards)
     {
@@ -89,17 +88,17 @@ RCT_EXPORT_METHOD(availableRewardsForAdUnitID: (NSString *)unitId callback: (RCT
 
 - (void)rewardedVideoAdDidLoadForAdUnitID:(NSString *)adUnitID
 {
-    
+
     NSLog(@"video loaded successfully");
     [self sendEventWithName:@"rewardedVideoAdDidLoadForAdUnitID" body:@{@"adUnitID": adUnitID}];
-    
+
 }
 
 
 - (void)rewardedVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error
 {
     [self sendEventWithName:@"rewardedVideoAdDidFailToLoadForAdUnitID" body:@{@"adUnitID": adUnitID, @"error":error}];
-    
+
 }
 
 - (void)rewardedVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID error:(NSError *)error

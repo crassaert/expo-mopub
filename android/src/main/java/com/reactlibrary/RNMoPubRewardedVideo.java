@@ -66,14 +66,14 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     }
 
     @ReactMethod
-    public void loadRewardedVideoAdWithAdUnitID(final String adUnitId) {
+    public void loadRewardedVideoAdWithAdUnitID(final String adUnitId, final String customerId) {
 
         Handler mainHandler = new Handler(Looper.getMainLooper());
 
         Runnable myRunnable = new Runnable() {
             @Override
             public void run() {
-                MoPubRewardedVideos.loadRewardedVideo(adUnitId);
+                MoPubRewardedVideos.loadRewardedVideo(adUnitId, customerId);
             }
         };
         mainHandler.post(myRunnable);
