@@ -1,6 +1,6 @@
 package com.reactlibrary;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.LifecycleEventListener;
@@ -10,10 +10,12 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.mopub.common.MediationSettings;
 import com.mopub.common.MoPubReward;
 import com.mopub.mobileads.MoPubErrorCode;
 import com.mopub.mobileads.MoPubRewardedVideoListener;
 import com.mopub.mobileads.MoPubRewardedVideos;
+import com.mopub.mobileads.MoPubRewardedVideoManager.RequestParameters;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -69,11 +71,14 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     public void loadRewardedVideoAdWithAdUnitID(final String adUnitId, final String customerId) {
 
         Handler mainHandler = new Handler(Looper.getMainLooper());
+        final RequestParameters mParams;
+
+        mParams = new RequestParameters(null, null, null, customerId);
 
         Runnable myRunnable = new Runnable() {
             @Override
             public void run() {
-                MoPubRewardedVideos.loadRewardedVideo(adUnitId, customerId);
+                MoPubRewardedVideos.loadRewardedVideo(adUnitId, mParams, (MediationSettings) null);
             }
         };
         mainHandler.post(myRunnable);
