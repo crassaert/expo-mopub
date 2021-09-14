@@ -2,10 +2,8 @@
 #import "RNMoPubInterstitial.h"
 #import <React/RCTLog.h>
 #import "RNNativeAdView.h"
-#import <AdColonyGlobalMediationSettings.h>
 #import <MPGoogleGlobalMediationSettings.h>
-#import <TapjoyGlobalMediationSettings.h>
-#import <VungleInstanceMediationSettings.h>
+#import <UnityAdsInstanceMediationSettings.h>
 #import "MPNativeAdConstants.h"
 #import "AdLibSDK.h"
 
@@ -34,12 +32,12 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(initializeInterstitialAd:(NSString *)unitId)
 {
-    
+
     [AdLibSDK initializeAdSDK:unitId];
     RCTLog(@"Mopub Initialized from Library!");
     self.interstitial = [MPInterstitialAdController interstitialAdControllerForAdUnitId:unitId];
     self.interstitial.delegate = self;
-    
+
 }
 
 RCT_REMAP_METHOD(isReady, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
@@ -57,9 +55,9 @@ RCT_EXPORT_METHOD(setKeywords:(NSString *)keywords) {
 }
 
 RCT_EXPORT_METHOD(loadAd) {
-    
+
     [self.interstitial loadAd];
-    
+
 }
 
 RCT_EXPORT_METHOD(show) {
@@ -74,7 +72,7 @@ RCT_EXPORT_METHOD(show) {
 {
     RCTLog(@"MoPub interstital failed to load");
     [self sendEventWithName:@"onFailed" body:@{@"message": @"MoPub interstital failed to load"}];
-    
+
 }
 
 - (void)interstitialDidLoadAd:(MPInterstitialAdController *)interstitial {
@@ -86,7 +84,7 @@ RCT_EXPORT_METHOD(show) {
 - (void)interstitialDidAppear:(MPInterstitialAdController *)interstitial {
     RCTLog(@"onShown");
     [self sendEventWithName:@"onShown" body:nil];
-    
+
 }
 
 - (void)interstitialDidDisappear:(MPInterstitialAdController *)interstitial {

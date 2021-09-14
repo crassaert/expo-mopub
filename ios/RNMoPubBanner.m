@@ -6,10 +6,8 @@
 //
 
 #import "RNMoPubBanner.h"
-#import <AdColonyGlobalMediationSettings.h>
 #import <MPGoogleGlobalMediationSettings.h>
-#import <TapjoyGlobalMediationSettings.h>
-#import <VungleInstanceMediationSettings.h>
+#import <UnityAdsInstanceMediationSettings.h>
 #import "AdLibSDK.h"
 @implementation RNMoPubBanner
 
@@ -21,7 +19,7 @@
     if (self) {
         self.delegate = self;
     }
-    
+
     return self;
 }
 
@@ -30,7 +28,7 @@
 - (void)setAdUnitId:(NSString *)adUnitId {
     if(![adUnitId isEqual:_adUnitId]) {
         _adUnitId = adUnitId;
-        
+
         [self forceRefreshAd];
     }
 }

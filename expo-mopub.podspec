@@ -15,49 +15,37 @@ Pod::Spec.new do |s|
     s.author       = { "author" => "author@domain.cn" }
     s.platform     = :ios, "7.0"
     s.source       = { :git => "https://github.com/jeremyvinec/expo-mopub", :tag => "#{s.version}" }
-    
+
     s.source_files = "ios/**/*.{h,m}"
     s.requires_arc = true
-    
+
     s.dependency "React"
-    
+
     s.subspec "MoPub" do |ss|
-        
-        ss.dependency 'mopub-ios-sdk', '~> 5.15.0'
-        
+
+        ss.dependency 'mopub-ios-sdk', '~> 5.17.0'
+
         s.static_framework = true
     end
 
-    s.subspec "AdColony" do |ss|
-        
-        ss.dependency 'MoPub-AdColony-Adapters', '~> 4.4.1.1'
-        
-    end
-
     s.subspec "AdMob" do |ss|
-        
-        ss.dependency 'MoPub-AdMob-Adapters', '~> 7.69.0'
-        
+
+        ss.dependency 'MoPub-AdMob-Adapters', '~> 8.6.0'
+
     end
 
-    s.subspec "Tapjoy" do |ss|
-        
-        ss.dependency 'MoPub-TapJoy-Adapters', '~> 12.7.1'
-        
+    s.subspec "FacebookAudienceNetwork" do |ss|
+
+        ss.dependency 'MoPub-FacebookAudienceNetwork-Adapters', '~> 6.2.1'
+
     end
-    
-    s.subspec "AppLovin" do |ss|
-        
-        ss.dependency 'MoPub-Applovin-Adapters', '~> 6.15.1'
-        
+
+    s.subspec "UnityAds" do |ss|
+
+        ss.dependency 'MoPub-UnityAds-Adapters', '~> 3.7.5.1'
+
     end
-    
-    s.subspec "Vungle" do |ss|
-        
-        ss.dependency 'MoPub-Vungle-Adapters', '~> 6.8.1'
-        
-    end
-    
+
     #s.dependency "others"
 end
 

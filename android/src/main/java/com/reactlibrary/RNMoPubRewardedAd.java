@@ -13,9 +13,9 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.mopub.common.MediationSettings;
 import com.mopub.common.MoPubReward;
 import com.mopub.mobileads.MoPubErrorCode;
-import com.mopub.mobileads.MoPubRewardedVideoListener;
-import com.mopub.mobileads.MoPubRewardedVideos;
-import com.mopub.mobileads.MoPubRewardedVideoManager.RequestParameters;
+import com.mopub.mobileads.MoPubRewardedAdListener;
+import com.mopub.mobileads.MoPubRewardedAds;
+import com.mopub.mobileads.MoPubRewardedAdManager.RequestParameters;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -31,30 +31,31 @@ import android.util.Log;
 import javax.annotation.Nullable;
 
 /**
- * Created by usamaazam on 30/03/2019.
+ * Created by crassaert on 07/09/2021.
  */
 
-public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements LifecycleEventListener, MoPubRewardedVideoListener {
+public class RNMoPubRewardedAd extends ReactContextBaseJavaModule implements LifecycleEventListener, MoPubRewardedAdListener {
 
     ReactApplicationContext mReactContext;
 
-    public RNMoPubRewardedVideo(ReactApplicationContext reactContext) {
+    public RNMoPubRewardedAd(ReactApplicationContext reactContext) {
         super(reactContext);
         mReactContext = reactContext;
     }
 
-    public static final String ON_REWARDED_VIDEO_LOAD_SUCCESS = "onRewardedVideoLoadSuccess";
-    public static final String ON_REWARDED_VIDEO_LOAD_FAILURE = "onRewardedVideoLoadFailure";
-    public static final String ON_REWARDED_VIDEO_STARTED = "onRewardedVideoStarted";
-    public static final String ON_REWARDED_VIDEO_PLAYBACK_ERROR = "onRewardedVideoPlaybackError";
-    public static final String ON_REWARDED_VIDEO_CLOSED = "onRewardedVideoClosed";
-    public static final String ON_REWARDED_VIDEO_COMPLETED = "onRewardedVideoCompleted";
-    public static final String ON_REWARDED_VIDEO_CLICKED = "onRewardedVideoClicked";
+    public static final String ON_REWARDED_AD_LOAD_SUCCESS = "onRewardedAdLoadSuccess";
+    public static final String ON_REWARDED_AD_LOAD_FAILURE = "onRewardedAdLoadFailure";
+    public static final String ON_REWARDED_AD_STARTED = "onRewardedAdStarted";
+    public static final String ON_REWARDED_AD_PLAYBACK_ERROR = "onRewardedAdPlaybackError";
+    public static final String ON_REWARDED_AD_CLOSED = "onRewardedAdClosed";
+    public static final String ON_REWARDED_AD_COMPLETED = "onRewardedAdCompleted";
+    public static final String ON_REWARDED_AD_CLICKED = "onRewardedAdClicked";
+    public static final String ON_REWARDED_AD_SHOW_ERROR = "onRewardedAdShowError";
 
 
     @Override
     public String getName() {
-        return "RNMoPubRewardedVideo";
+        return "RNMoPubRewardedAd";
     }
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
@@ -64,14 +65,14 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
 
 
     @ReactMethod
-    public void initializeSdkForRewardedVideoAd(String adUnitId) {
+    public void initializeSdkForRewardedAd(String adUnitId) {
 
         AdLibSDK.initializeAdSDK(null, adUnitId, mReactContext.getCurrentActivity());
 
     }
 
     @ReactMethod
-    public void loadRewardedVideoAdWithAdUnitID(final String adUnitId, final String customerId) {
+    public void loadRewardedAdWithAdUnitID(final String adUnitId, final String customerId) {
 
         Handler mainHandler = new Handler(Looper.getMainLooper());
         final RequestParameters mParams;
@@ -81,12 +82,12 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
         Runnable myRunnable = new Runnable() {
             @Override
             public void run() {
-                MoPubRewardedVideos.loadRewardedVideo(adUnitId, mParams, (MediationSettings) null);
+                MoPubRewardedAds.loadRewardedAd(adUnitId, mParams, (MediationSettings) null);
             }
         };
         mainHandler.post(myRunnable);
 
-        MoPubRewardedVideos.setRewardedVideoListener(this);
+        MoPubRewardedAds.setRewardedAdListener(this);
     }
 
 
@@ -103,19 +104,9 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     }
 
     @ReactMethod
-    public void presentRewardedVideoAdForAdUnitID(final String unitId, String currencyType, Double amount, final Callback callback) {
+    public void presentRewardedAdForAdUnitID(String unitId, String currencyType, Double amount, Callback callback) {
 
-        Handler mainHandler = new Handler(Looper.getMainLooper());
-
-        Runnable myRunnable = new Runnable() {
-            @Override
-            public void run() {
-                MoPubRewardedVideos.showRewardedVideo(unitId);
-                sendCallBackMessage(callback, true, "video showing!");
-            }
-        };
-
-        Set<MoPubReward> rewards = MoPubRewardedVideos.getAvailableRewards(unitId);
+        Set<MoPubReward> rewards = MoPubRewardedAds.getAvailableRewards(unitId);
 
         if (rewards.isEmpty()) {
             sendCallBackMessage(callback, false, "reward not found for this UnitId!");
@@ -127,24 +118,27 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
                 }
             }
             if (selectedReward != null) {
-                mainHandler.post(myRunnable);
+                MoPubRewardedAds.showRewardedAd(unitId);
+                sendCallBackMessage(callback, true, "video showing!");
 
             } else {
                 sendCallBackMessage(callback, false, "reward not found! for these ingredients!");
             }
         }
+
+
     }
 
     @ReactMethod
     public void hasAdAvailableForAdUnitID(String adUnitId, Callback callback) {
 
-        callback.invoke(MoPubRewardedVideos.hasRewardedVideo(adUnitId));
+        callback.invoke(MoPubRewardedAds.hasRewardedAd(adUnitId));
 
     }
 
     @ReactMethod
     public void availableRewardsForAdUnitID(String unitId, Callback callback) {
-        Set<MoPubReward> rewards = MoPubRewardedVideos.getAvailableRewards(unitId);
+        Set<MoPubReward> rewards = MoPubRewardedAds.getAvailableRewards(unitId);
 
         HashMap<String, Integer> hm = new HashMap<>();
         for (MoPubReward reward : rewards) {
@@ -175,12 +169,12 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
 
 
     @Override
-    public void onRewardedVideoLoadSuccess(String adUnitId) {
-        sendEvent(ON_REWARDED_VIDEO_LOAD_SUCCESS, null);
+    public void onRewardedAdLoadSuccess(String adUnitId) {
+        sendEvent(ON_REWARDED_AD_LOAD_SUCCESS, null);
     }
 
     @Override
-    public void onRewardedVideoLoadFailure(String adUnitId, MoPubErrorCode errorCode) {
+    public void onRewardedAdLoadFailure(String adUnitId, MoPubErrorCode errorCode) {
 
         HashMap<String, String> hm = new HashMap<>();
         hm.put("error", errorCode.toString());
@@ -190,36 +184,16 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
             map.putString(entry.getKey(), entry.getValue());
         }
 
-        sendEvent(ON_REWARDED_VIDEO_LOAD_FAILURE, map);
+        sendEvent(ON_REWARDED_AD_LOAD_FAILURE, map);
     }
 
     @Override
-    public void onRewardedVideoStarted(String adUnitId) {
-        sendEvent(ON_REWARDED_VIDEO_STARTED, null);
+    public void onRewardedAdStarted(String adUnitId) {
+        sendEvent(ON_REWARDED_AD_STARTED, null);
     }
 
     @Override
-    public void onRewardedVideoPlaybackError(String adUnitId, MoPubErrorCode errorCode) {
-        HashMap<String, String> hm = new HashMap<>();
-        hm.put("error", errorCode.toString());
-
-        WritableMap map = new WritableNativeMap();
-        for (Map.Entry<String, String> entry : hm.entrySet()) {
-            map.putString(entry.getKey(), entry.getValue());
-        }
-
-
-        sendEvent(ON_REWARDED_VIDEO_PLAYBACK_ERROR, null);
-    }
-
-    @Override
-    public void onRewardedVideoClosed(String adUnitId) {
-        sendEvent(ON_REWARDED_VIDEO_CLOSED, null);
-
-    }
-
-    @Override
-    public void onRewardedVideoCompleted(Set<String> adUnitIds, MoPubReward reward) {
+    public void onRewardedAdCompleted(Set<String> adUnitIds, MoPubReward reward) {
         HashMap<String, String> hm = new HashMap<>();
         hm.put("amount", String.valueOf(reward.getAmount()));
         hm.put("currencyType", String.valueOf(reward.getLabel()));
@@ -228,11 +202,29 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
         for (Map.Entry<String, String> entry : hm.entrySet()) {
             map.putString(entry.getKey(), entry.getValue());
         }
-        sendEvent(ON_REWARDED_VIDEO_COMPLETED, map);
+        sendEvent(ON_REWARDED_AD_COMPLETED, map);
     }
 
     @Override
-    public void onRewardedVideoClicked(@NonNull String adUnitId) {
-        sendEvent(ON_REWARDED_VIDEO_CLICKED, null);
+    public void onRewardedAdClicked(@NonNull String adUnitId) {
+        sendEvent(ON_REWARDED_AD_CLICKED, null);
+    }
+
+    @Override
+    public void onRewardedAdClosed(@NonNull String s) {
+        sendEvent(ON_REWARDED_AD_CLOSED, null);
+    }
+
+    @Override
+    public void onRewardedAdShowError(@NonNull String s, @NonNull MoPubErrorCode moPubErrorCode) {
+        HashMap<String, String> hm = new HashMap<>();
+        hm.put("error", moPubErrorCode.toString());
+
+        WritableMap map = new WritableNativeMap();
+        for (Map.Entry<String, String> entry : hm.entrySet()) {
+            map.putString(entry.getKey(), entry.getValue());
+        }
+
+        sendEvent(ON_REWARDED_AD_SHOW_ERROR, map);
     }
 }
